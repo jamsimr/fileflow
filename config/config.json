@@ -1,0 +1,18 @@
+{
+  "input_folder": "data/input",
+  "processed_folder": "data/processed",
+  "quarantine_folder": "data/quarantine",
+  "archive_folder": "data/archive",
+  "report_folder": "data/report",
+  "log_file": "data/logs/fileflow.log",
+  "allowed_categories": ["report", "invoice", "meeting", "image"],
+  "allowed_extensions": ["pdf", "csv", "txt", "jpg", "png"],
+  "filename_pattern": "^(report|invoice|meeting|image)_\\d{8}_[a-z0-9-]+\\.(pdf|csv|txt|jpg|png)$",
+  "category_folders": {
+    "report": "reports",
+    "invoice": "invoices",
+    "meeting": "meetings",
+    "image": "images"
+  },
+  "archive_days": 30
+}
