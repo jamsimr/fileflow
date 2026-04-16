@@ -41,13 +41,17 @@ def process_files(config: dict) -> dict:
     for filename in os.listdir(input_folder):
         file_path = os.path.join(input_folder, filename)
 
+            # Skip placeholder and hidden files
+        if filename.startswith("."):
+            continue
+
         # Skip anything that is not a file
         if not os.path.isfile(file_path):
             continue
 
         counts["scanned"] += 1
 
-        if is_valid_filename(filename):
+        if is_valid_filename(filename, filename_pattern):
             category = filename.split("_")[0]
             category_subfolder = category_folders[category]
             final_processed_folder = os.path.join(processed_folder, category_subfolder)

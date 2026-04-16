@@ -3,7 +3,7 @@
   "processed_folder": "data/processed",
   "quarantine_folder": "data/quarantine",
   "archive_folder": "data/archive",
-  "report_folder": "data/report",
+  "report_folder": "data/reports",
   "log_file": "data/logs/fileflow.log",
   "allowed_categories": ["report", "invoice", "meeting", "image"],
   "allowed_extensions": ["pdf", "csv", "txt", "jpg", "png"],
