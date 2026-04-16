@@ -9,16 +9,21 @@ def main() -> None:
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     config_path = os.path.join(project_root, "config","config.json")
 
-    config = load_config(config_path)
+    try:
+        config = load_config(config_path)
+  
+        # Convert relative paths from config into project-root-based absolute paths
+        for key in ["input_folder", "processed_folder", "quarantine_folder", "archive_folder", "report_folder", "log_file"]:
+            config[key] = os.path.join(project_root, config[key])
 
-    # Convert relative paths from config into project-root-based absolute paths
-    for key in ["input_folder", "processed_folder", "quarantine_folder", "archive_folder", "report_folder", "log_file"]:
-        config[key] = os.path.join(project_root, config[key])
-
-    counts = process_files(config)
+        counts = process_files(config)
     
-    print_summary(counts)
-    write_csv_report(counts, config["report_folder"])
+        print_summary(counts)
+        write_csv_report(counts, config["report_folder"])
+
+    except Exception as e:
+        print(f"Error loading config: {e}")
+        return
 
 if __name__ == "__main__":
     main()
