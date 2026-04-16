@@ -1,0 +1,18 @@
+# Ignore Python bytecode files and cache directories
+__pycache__/
+*.pyc
+.DS_Store
+
+# Ignore all files in these data directories
+data/input/*
+data/processed/*
+data/quarantine/*
+data/archive/*
+data/report/*
+data/logs/*
+*.log
+
+# Ignore editor files
+.vscode/
+.idea/
+*.swp

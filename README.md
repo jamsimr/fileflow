@@ -1,21 +1,50 @@
-#FileFlow is a lightweight Python command-line tool for organising files from a shared input folder.
+# FileFlow
 
-##Version 1.0 15 April 2026
+A lightweight Python command-line tool for organising files from a shared input folder.
 
-    Minimum viable product of FileFlow:
+## Version 1.0 - 15 April 2026
 
-        - read files from an input folder
-        - validate filenames
-        - move valid files to one destination
-        - move invalid files to quanratine
-        - write a simple log
-        - print a basic summary to the console
+### Minimum Viable Product
 
-    Naming standard for all files:
+FileFlow can:
+- read files from an input folder
+- validate filenames against a naming standard
+- move valid files to a processed folder
+- move invalid files to quarantine
+- write a simple log of operations
+- print a basic summary to the console
 
-        category_YYYYMMDD_description.ext
+### Installation
 
-        catergoires = report, invoice, meeting, image
-        ext = .pdf, .csv, .txt, .jpg, .png
+1. Make sure you have Python 3.8+ installed
+2. Clone or download this project
+3. Navigate to the fileflow directory
+4. Run: `python app/main.py`
 
-        example = report_20260415_webex-performance.pdf
+### Usage
+
+1. Place files in the `data/input/` folder
+2. Run FileFlow using from the FileFlow directory: `./scripts/run_fileflow.sh`
+3. Check results in `data/processed/` and `data/quarantine/`
+4. View logs in `data/logs/`
+
+### Naming Standard
+
+All files must follow: `category_YYYYMMDD_description.ext`
+
+Categories: report, invoice, meeting, image
+Extensions: .pdf, .csv, .txt, .jpg, .png
+
+Example: `report_20260415_webex-performance.pdf`
+
+### Project Structure
+
+```
+fileflow/
+├── app/              # Main code
+├── data/             # Folders for files
+├── scripts/          # Helper scripts
+└── README.md         # This file
+```
+
+    
