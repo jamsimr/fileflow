@@ -28,6 +28,16 @@ FileFlow can:
 3. Check results in `data/processed/` and `data/quarantine/`
 4. View logs in `data/logs/`
 
+### Scripts
+
+FileFlow includes several helper scripts in the `scripts/` folder:
+
+- **`run_fileflow.sh`**: Main script to run FileFlow. Processes files from input folder.
+- **`seed_test_data.sh`**: Generates sample files with valid and invalid names for testing.
+- **`reset_test_data.sh`**: Clears all files from data folders to start fresh.
+
+To use any script, navigate to the fileflow directory and run: `./scripts/script_name.sh`
+
 ### Naming Standard
 
 All files must follow: `category_YYYYMMDD_description.ext`

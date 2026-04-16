@@ -4,7 +4,7 @@ from app.processor import process_files
 from app.reporter import print_summary
 
 def main() -> None:
-    # Get project root directory."""
+    """Main entry point for FileFlow application. Sets up directory paths relative to project root, ensures input folder exists, processes files from input folder to processed or quarantine folders, and prints a summary of the processing results."""
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     input_folder = os.path.join(project_root, "data", "input")
@@ -12,10 +12,8 @@ def main() -> None:
     quarantine_folder = os.path.join(project_root, "data", "quarantine")
     log_file = os.path.join(project_root, "data", "processing.log")
 
-    # Ensure input folder exists
     os.makedirs(input_folder, exist_ok=True)
 
-    # Process files and get summary counts
     counts = process_files(input_folder=input_folder, processed_folder=processed_folder, quarantine_folder=quarantine_folder, log_file=log_file)
     print_summary(counts)
 
