@@ -17,7 +17,7 @@ def get_unique_destination(destination: str) -> tuple[str, bool]:
 
     return f"{base}_{counter}{ext}", True
 
-def process_files(config: dict) -> dict:
+def process_files(config: dict, verbose: bool = False, dry_run: bool = False) -> dict:
     """Process files from input folder to processed or quarantine folders based on filename validation, and log the results."""
     input_folder = config["input_folder"]
     processed_folder = config["processed_folder"]
@@ -54,38 +54,43 @@ def process_files(config: dict) -> dict:
 
         counts["scanned"] += 1
 
-        if is_valid_filename(filename, filename_pattern):
-            category = filename.split("_")[0]
-            category_subfolder = category_folders[category]
-            final_processed_folder = os.path.join(processed_folder, category_subfolder)
-            os.makedirs(final_processed_folder, exist_ok=True)
+        try:
+            if is_valid_filename(filename, filename_pattern):
+                category = filename.split("_")[0]
+                category_subfolder = category_folders[category]
+                final_processed_folder = os.path.join(processed_folder, category_subfolder)
+                os.makedirs(final_processed_folder, exist_ok=True)
 
-            destination = os.path.join(final_processed_folder, filename)
+                destination = os.path.join(final_processed_folder, filename)
 
-            was_archived, archive_duplicate_found = archive_existing_file(
-                destination=destination,
-                archive_folder=archive_folder,
-                category_subfolder=category_subfolder,
-                filename=filename,
-                log_file=log_file
-            )
-            if was_archived:
-                counts["archived"] += 1 
-            
-            if archive_duplicate_found:
-                counts["archive_duplicates"] += 1
+                was_archived, archive_duplicate_found = archive_existing_file(
+                    destination=destination,
+                    archive_folder=archive_folder,
+                    category_subfolder=category_subfolder,
+                    filename=filename,
+                    log_file=log_file
+                )
+                
+                if was_archived:
+                    counts["archived"] += 1 
+                
+                if archive_duplicate_found:
+                    counts["archive_duplicates"] += 1
 
-            shutil.move(file_path, destination)
-            print(f"Processed: {filename}")
-            write_log(f"VALID: {filename} -> {destination}", log_file)
-            counts["processed"] += 1
-        else:
-            destination = os.path.join(quarantine_folder, filename)
-
-            shutil.move(file_path, destination)
-            print(f"Quarantined: {filename}")
-            write_log(f"INVALID: {filename} -> {destination}", log_file)
-            counts["quarantined"] += 1
+                shutil.move(file_path, destination)
+                print(f"Processed: {filename}")
+                write_log(f"VALID: {filename} -> {destination}", log_file)
+                counts["processed"] += 1
+            else:
+                destination = os.path.join(quarantine_folder, filename)
+                shutil.move(file_path, destination)
+                print(f"Quarantined: {filename}")
+                write_log(f"INVALID: {filename} -> {destination}", log_file)
+                counts["quarantined"] += 1
+        
+        except Exception as error:
+            print(f"Error processing {filename}: {error}")
+            write_log(f"ERROR: {filename} -> {error}", log_file)
 
     return counts
 

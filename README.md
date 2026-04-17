@@ -19,14 +19,57 @@ FileFlow can:
 1. Make sure you have Python 3.8+ installed
 2. Clone or download this project
 3. Navigate to the fileflow directory
-4. Run: `python app/main.py`
+4. Make the CLI executable:
+   ```bash
+   chmod +x fileflow
+   ```
+5. (Optional but recommended) Create a virtual environment and install dependencies:
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   pip install -r requirements.txt
+   ```
 
 ### Usage
 
 1. Place files in the `data/input/` folder
-2. Run FileFlow using from the FileFlow directory: `./scripts/run_fileflow.sh`
-3. Check results in category subfolders under `data/processed/` (reports/, invoices/, meetings/, images/) and `data/quarantine/`
-4. View logs in `data/logs/`
+2. 
+2. Run FileFlow using the CLI command:
+   ```bash
+   chmod +x fileflow
+   ./fileflow
+   ```
+3. Use optional CLI flags for additional behaviour:
+   ```bash
+   ./fileflow --verbose
+   ./fileflow --dry-run
+   ./fileflow --config config/config.json
+   ```
+4. Check results in category subfolders under `data/processed/` (reports/, invoices/, meetings/, images/) and `data/quarantine/`
+5. View logs in `data/logs/`
+
+### Command-line options
+
+FileFlow supports the following CLI options:
+
+- `--config PATH`: Path to the config file (default: `config/config.json`)
+- `--verbose`: Print detailed step-by-step information during processing
+- `--dry-run`: Preview actions without moving or modifying any files
+
+### CLI Wrapper
+
+FileFlow can be run using the `fileflow` command via the included CLI wrapper script:
+
+```bash
+./fileflow
+```
+
+This script:
+- ensures the correct working directory is used
+- activates the virtual environment if present
+- passes all CLI arguments through to the application
+
+This provides a clean, user-friendly interface compared to running Python modules directly.
 
 ### Scripts
 
@@ -36,7 +79,7 @@ Before running any scripts run `chmod +x scripts/*.sh`
 
 - **`run_fileflow.sh`**: Main script to run FileFlow. Processes files from input folder and organizes valid files by category.
 - **`seed_test_data.sh`**: Generates sample files with valid and invalid names for testing.
-- **`reset_test_data.sh`**: Clears all files from data folders to start fresh.
+- **`reset_data.sh`**: Clears all files from data folders to start fresh.
 
 To use any script, navigate to the fileflow directory and run: `./scripts/script_name.sh`
 
