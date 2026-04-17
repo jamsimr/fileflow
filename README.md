@@ -32,6 +32,8 @@ FileFlow can:
 
 FileFlow includes several helper scripts in the `scripts/` folder:
 
+Before running any scripts run `chmod +x scripts/*.sh`
+
 - **`run_fileflow.sh`**: Main script to run FileFlow. Processes files from input folder and organizes valid files by category.
 - **`seed_test_data.sh`**: Generates sample files with valid and invalid names for testing.
 - **`reset_test_data.sh`**: Clears all files from data folders to start fresh.
