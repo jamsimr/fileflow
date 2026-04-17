@@ -1,15 +1,14 @@
 #!/bin/bash
 
-echo "Seeding test data for FileFlow..."
+echo "Seeding FileFlow test data..."
 
-# Valid files
+# VALID FILES (all categories)
 touch data/input/report_20260415_sales-summary.pdf
 touch data/input/invoice_20260410_supplier-abc.csv
 touch data/input/meeting_20260411_team-sync.txt
 touch data/input/image_20260409_warehouse-photo.jpg
-touch data/input/image_20260409_warehouse-photo.jpg
 
-# Invalid files
+# INVALID FILES
 touch "data/input/sales report final.pdf"
 touch data/input/invoice_april.csv
 touch data/input/meetingnotes.txt
