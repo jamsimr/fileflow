@@ -1,18 +1,22 @@
-# Ignore Python bytecode files and cache directories
+# Ignore everything in data
+data/**
+
+# Allow folder structure
+!data/
+!data/**/
+
+# Only keep placeholder files
+!data/**/.gitkeep
+
+# Ignore all logs
+*.log
+
+# Python
 __pycache__/
 *.pyc
 .DS_Store
 
-# Ignore all files in these data directories
-data/input/*
-data/processed/*
-data/quarantine/*
-data/archive/*
-data/report/*
-data/logs/*
-*.log
-
-# Ignore editor files
+# Editor files
 .vscode/
 .idea/
 *.swp

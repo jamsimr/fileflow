@@ -9,6 +9,7 @@ def print_summary(counts: dict) -> None:
     print(f"Total files processed: {counts['processed']}")
     print(f"Total files quarantined: {counts['quarantined']}")
     print(f"Total files archived: {counts['archived']}")
+    print(f"Total archive duplicates: {counts['archive_duplicates']}")
 
 def write_csv_report(counts: dict, report_folder: str) -> None:
     """Write a CSV report of the processing results to the report folder."""
@@ -24,5 +25,6 @@ def write_csv_report(counts: dict, report_folder: str) -> None:
         writer.writerow(["Processed", counts["processed"]])
         writer.writerow(["Quarantined", counts["quarantined"]])
         writer.writerow(["Archived", counts["archived"]])
+        writer.writerow(["Archive Duplicates", counts["archive_duplicates"]])
 
     print(f"Report written to: {report_path}")
