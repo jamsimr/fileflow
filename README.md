@@ -71,12 +71,12 @@ This provides a clean, user-friendly interface compared to running Python module
 
 ### Scripts
 
-FileFlow includes several helper scripts in the `scripts/` folder:
+FileFlow includes several helper bash scripts in the `scripts/` folder:
 
 Before running any scripts run `chmod +x scripts/*.sh`
 
 - **`run_fileflow.sh`**: Main script to run FileFlow. Processes files from input folder and organizes valid files by category.
-- - **`run_fileflow_docker.sh`**: Run FileFlow in a Docker environment.
+- **`run_fileflow_docker.sh`**: Run FileFlow in a Docker environment.
 - **`seed_test_data.sh`**: Generates sample files with valid and invalid names for testing.
 - **`reset_data.sh`**: Clears all files from data folders to start fresh.
 
