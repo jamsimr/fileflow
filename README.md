@@ -4,8 +4,6 @@ A lightweight Python command-line tool for organising files from a shared input 
 
 ## Version 1.0 - 17 April 2026
 
-### Minimum Viable Product
-
 FileFlow can:
 - read files from an input folder
 - validate filenames against a naming standard
