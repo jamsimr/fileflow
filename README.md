@@ -4,6 +4,8 @@ A lightweight Python command-line tool for organising files from a shared input 
 
 ## Version 1.0 - 17 April 2026
 
+### Minimum Viable Product
+
 FileFlow can:
 - read files from an input folder
 - validate filenames against a naming standard
@@ -71,7 +73,7 @@ This provides a clean, user-friendly interface compared to running Python module
 
 ### Scripts
 
-FileFlow includes several helper bash scripts in the `scripts/` folder:
+FileFlow includes several bash scripts in the `scripts/` folder:
 
 Before running any scripts run `chmod +x scripts/*.sh`
 
@@ -100,7 +102,54 @@ Valid files are automatically organized into category-specific subfolders under 
 - Files starting with `meeting_` → `data/processed/meetings/`
 - Files starting with `image_` → `data/processed/images/`
 
+
 Invalid files are moved to `data/quarantine/` for review.
+
+### Archiving and Duplicate Handling
+
+FileFlow includes an archive system to manage repeated processing of valid files and prevent data loss.
+
+#### Archive Behaviour
+
+When a valid file is processed, FileFlow checks whether a file with the same name already exists in the corresponding `processed/` subfolder.
+
+- If no existing file is found:
+  - The file is moved directly to `processed/`
+- If a file with the same name already exists:
+  - The existing file is moved to the `archive/` folder
+  - The new file replaces it in `processed/`
+
+This ensures that the `processed/` folder always contains the latest version of each file, while older versions are preserved in `archive/`.
+
+#### Archive Structure
+
+Archived files are stored in category-specific subfolders, mirroring the structure of `processed/`:
+
+- `archive/reports/`
+- `archive/invoices/`
+- `archive/meetings/`
+- `archive/images/`
+
+#### Duplicate Handling in Archive
+
+If multiple versions of the same file are archived, FileFlow ensures that no files are overwritten.
+
+- The first archived file keeps its original name
+- Subsequent archived versions are renamed with an incrementing suffix:
+  - `report_20260415_sales-summary.pdf`
+  - `report_20260415_sales-summary_1.pdf`
+  - `report_20260415_sales-summary_2.pdf`
+
+This behaviour is implemented using a helper function that checks for existing filenames and generates a unique destination.
+
+#### Summary Metrics
+
+FileFlow tracks the following archive-related metrics during execution:
+
+- `archived`: Number of processed files that were moved to archive
+- `archive_duplicates`: Number of times an archived file required renaming due to a naming collision
+
+These metrics are included in both console output and generated reports, providing visibility into file versioning behaviour.
 
 ### Project Structure
 
